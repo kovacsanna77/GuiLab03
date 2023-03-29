@@ -17,7 +17,7 @@
             <RowDefinition Height="7*"></RowDefinition>
         </Grid.RowDefinitions>
         <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Column="0" Grid.Row="1"/>
-        <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Column="2"  Grid.RowSpan="2" Grid.Row="1"/>
+        <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Column="2" Grid.RowSpan="2" Grid.Row="1"/>
         <ComboBox Width="200" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" Margin="5,0,5,0"/>
         <CheckBox Content="Filter"  Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Width="98" Margin="5,0,5,0" VerticalAlignment="Center"/>
         <Button Grid.Column="1" Content="Button" HorizontalAlignment="Center" Margin="0,5,0,5" Grid.Row="1" Width="100" VerticalAlignment="Top"/>
