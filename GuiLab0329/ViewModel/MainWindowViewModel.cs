@@ -10,8 +10,8 @@ namespace GuiLab0329.ViewModel
     public class MainWindowViewModel : ObservableRecipient
     {
 
-        ObservableCollection<Food> leftList { get; set; }
-        ObservableCollection<Food> rightList { get; set; }
+       public  ObservableCollection<Food> leftList { get; set; }
+        public ObservableCollection<Food> rightList { get; set; }
 
         private Food selectedFromLeft;
 
