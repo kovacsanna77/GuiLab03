@@ -31,7 +31,8 @@ namespace GuiLab0329.ViewModel
         public Food SelectedFromRight
         {
             get { return selectedFromRight; }
-            set {
+            set 
+            {
                 selectedFromRight = value; 
             }
         }

@@ -4,9 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GuiLab0329"
+        xmlns:vm="clr-namespace:GuiLab0329.ViewModel"
         mc:Ignorable="d"
         Title="EditWindow" Height="450" Width="800">
-    <Grid>
+    <Window.DataContext>
+        <vm:EditWindowViewModel/>
+    </Window.DataContext>
+    <StackPanel>
+        <Label Content="Name" Padding="10"/>
+        <TextBox Text="{Binding Current.Name}" Padding="10"/>
+        <Label Content="Type" Padding="10"/>
+        <TextBox Text="{Binding Current.Type}" Padding="10"/>
         
-    </Grid>
+    </StackPanel>
 </Window>
