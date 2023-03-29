@@ -5,11 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GuiLab0329"
         xmlns:vm="clr-namespace:GuiLab0329.ViewModel"
+         xmlns:hp="clr-namespace:GuiLab0329.Helper"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
+    <Window.Resources>
+        <hp:ColorConverter x:Key="colorConverter"/>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"></ColumnDefinition>
@@ -21,10 +25,10 @@
             <RowDefinition Height="7*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <ListBox ItemsSource="{Binding leftList}" SelectedItem="{Binding SelectedFromLeft}" Grid.Column="0" Grid.Row="1" HorizontalContentAlignment="Left" >
+        <ListBox ItemsSource="{Binding leftList}" SelectedItem="{Binding SelectedFromLeft}" Grid.Column="0" Grid.Row="1" HorizontalContentAlignment="Left">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid >
+                    <Grid Background="{Binding Type, Converter={StaticResource colorConverter}}" HorizontalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>

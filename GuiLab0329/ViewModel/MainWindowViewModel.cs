@@ -65,7 +65,7 @@ namespace GuiLab0329.ViewModel
 
             AddToRight = new RelayCommand(
                 () => rightList.Add(SelectedFromLeft),
-                ()=>SelectedFromLeft != null
+                ()=> SelectedFromLeft != null
                 );
 
             RemoveFromRight = new RelayCommand(
