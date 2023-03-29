@@ -27,7 +27,7 @@ namespace GuiLab0329
 
         private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
+            
         }
     }
 }

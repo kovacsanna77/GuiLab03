@@ -47,6 +47,7 @@ namespace GuiLab0329.ViewModel
             get
             {
                 return rightList.Count == 0 ? 0 : rightList.Sum(t => t.Cost);
+
             }
         }
 
@@ -63,11 +64,14 @@ namespace GuiLab0329.ViewModel
             rightList.Add(leftList[0]);
 
             AddToRight = new RelayCommand(
-                () => rightList.Add(SelectedFromLeft)
+                () => rightList.Add(SelectedFromLeft),
+                ()=>SelectedFromLeft != null
                 );
 
             RemoveFromRight = new RelayCommand(
-                () => rightList.Remove(SelectedFromRight));
+                () => rightList.Remove(SelectedFromRight),
+                () => SelectedFromRight != null
+                );
 
             Doubleclick = new RelayCommand(() => Edit(SelectedFromLeft));
 
