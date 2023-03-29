@@ -39,7 +39,7 @@
         </ListBox>
 
 
-        <ListBox ItemsSource="{Binding rightList}" SelectedItem="{Binding SelectedFromRight}" Grid.Column="2" Grid.RowSpan="2" Grid.Row="1">
+        <ListBox ItemsSource="{Binding rightList}" SelectedItem="{Binding SelectedFromRight}" Grid.Column="2" Grid.RowSpan="2" Grid.Row="1" MouseDoubleClick=">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -67,3 +67,4 @@
 
     </Grid>
 </Window>
+
