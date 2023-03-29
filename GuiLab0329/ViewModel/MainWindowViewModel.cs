@@ -38,7 +38,6 @@ namespace GuiLab0329.ViewModel
         }
 
 
-
         public ICommand AddToRight { get; set; }
         public  ICommand RemoveFromRight { get; set; }
         
@@ -56,7 +55,7 @@ namespace GuiLab0329.ViewModel
             leftList = new ObservableCollection<Food>();
             rightList = new ObservableCollection<Food>();
 
-            leftList.Add(new Food() { Name = "Bécsi Szelel", Type = typeOfFood.maincourse, Cost = 2500 });
+            leftList.Add(new Food() { Name = "Bécsi Szelet", Type = typeOfFood.maincourse, Cost = 2500 });
             leftList.Add(new Food() { Name = "Palacsinta", Type = typeOfFood.dessert, Cost = 1000 });
             leftList.Add(new Food() { Name = "Limonádé", Type = typeOfFood.drink, Cost = 1000 });
 
