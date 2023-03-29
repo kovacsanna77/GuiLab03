@@ -40,6 +40,7 @@ namespace GuiLab0329.ViewModel
 
         public ICommand AddToRight { get; set; }
         public  ICommand RemoveFromRight { get; set; }
+        public ICommand Doubleclick { get; set; }
         
         public int AllCost
         {
@@ -68,6 +69,13 @@ namespace GuiLab0329.ViewModel
             RemoveFromRight = new RelayCommand(
                 () => rightList.Remove(SelectedFromRight));
 
+            Doubleclick = new RelayCommand(() => Edit(SelectedFromLeft));
+
+        }
+
+        public void Edit(Food f)
+        {
+            new EditWindow(f).ShowDialog();
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using GuiLab0329.Model;
+using GuiLab0329.ViewModel;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +22,33 @@ namespace GuiLab0329
     /// </summary>
     public partial class EditWindow : Window
     {
-        public EditWindow()
+        public EditWindow(Food f)
         {
             InitializeComponent();
+            this.DataContext = new EditWindowViewModel();
+            (this.DataContext as EditWindowViewModel).Setup(f);
+        }
+
+        private void Vm_EditedDone(object? sender, EventArgs e)
+        {
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var item in stack.Children)
+            {
+                if (item is TextBox t)
+                {
+                    t.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+                }
+            }
+            this.DialogResult = true;
+        }
+
+        private void Button_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }
