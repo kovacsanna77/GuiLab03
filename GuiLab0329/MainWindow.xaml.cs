@@ -23,6 +23,7 @@ namespace GuiLab0329
         public MainWindow()
         {
             InitializeComponent();
+
         }
 
         private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)

@@ -12,6 +12,8 @@ namespace GuiLab0329.ViewModel
 
        public  ObservableCollection<Food> leftList { get; set; }
         public ObservableCollection<Food> rightList { get; set; }
+        public ObservableCollection<Food> filteredList { get; set; }
+        public bool checkeda{get; set;}
 
         private Food selectedFromLeft;
 
@@ -41,6 +43,7 @@ namespace GuiLab0329.ViewModel
         public ICommand AddToRight { get; set; }
         public  ICommand RemoveFromRight { get; set; }
         public ICommand Doubleclick { get; set; }
+        public ICommand Checked { get; set; }
         
         public int AllCost
         {
@@ -55,13 +58,17 @@ namespace GuiLab0329.ViewModel
         {
 
             leftList = new ObservableCollection<Food>();
+            
             rightList = new ObservableCollection<Food>();
 
             leftList.Add(new Food() { Name = "Bécsi Szelet", Type = typeOfFood.maincourse, Cost = 2500 });
             leftList.Add(new Food() { Name = "Palacsinta", Type = typeOfFood.dessert, Cost = 1000 });
             leftList.Add(new Food() { Name = "Limonádé", Type = typeOfFood.drink, Cost = 1000 });
+            filteredList = new ObservableCollection<Food>(leftList);
 
-            rightList.Add(leftList[0]);
+
+            Checked = new RelayCommand(()=>Filter(typeOfFood.dessert));
+            
 
             AddToRight = new RelayCommand(
                 () => rightList.Add(SelectedFromLeft),
@@ -74,6 +81,18 @@ namespace GuiLab0329.ViewModel
                 );
 
             Doubleclick = new RelayCommand(() => Edit(SelectedFromLeft));
+
+        }
+        public void Filter(typeOfFood type )
+        {
+            filteredList.Clear();
+            foreach (Food food in leftList)
+            {
+                if (food.Type==type)
+                {
+                    filteredList.Add(food);
+                }
+            }
 
         }
 
