@@ -13,7 +13,9 @@ namespace GuiLab0329.ViewModel
        public  ObservableCollection<Food> leftList { get; set; }
         public ObservableCollection<Food> rightList { get; set; }
         public ObservableCollection<Food> filteredList { get; set; }
-        public bool checkeda{get; set;}
+        public ObservableCollection<typeOfFood> filterTypes { get; set; }
+        public typeOfFood selectedFilter { get; set; }
+        public bool check{get; set;}
 
         private Food selectedFromLeft;
 
@@ -58,16 +60,23 @@ namespace GuiLab0329.ViewModel
         {
 
             leftList = new ObservableCollection<Food>();
-            
+            filteredList = new ObservableCollection<Food>();
+            filterTypes = new ObservableCollection<typeOfFood>();
             rightList = new ObservableCollection<Food>();
 
+            filterTypes.Add(typeOfFood.maincourse);
+            filterTypes.Add(typeOfFood.dessert);
+            filterTypes.Add(typeOfFood.appetizer);
+            filterTypes.Add(typeOfFood.drink);
+            
             leftList.Add(new Food() { Name = "Bécsi Szelet", Type = typeOfFood.maincourse, Cost = 2500 });
             leftList.Add(new Food() { Name = "Palacsinta", Type = typeOfFood.dessert, Cost = 1000 });
             leftList.Add(new Food() { Name = "Limonádé", Type = typeOfFood.drink, Cost = 1000 });
-            filteredList = new ObservableCollection<Food>(leftList);
+            ListCopy();
 
-
-            Checked = new RelayCommand(()=>Filter(typeOfFood.dessert));
+            check = false;
+            Checked = new RelayCommand(()=>Filter(selectedFilter));
+            
             
 
             AddToRight = new RelayCommand(
@@ -85,15 +94,41 @@ namespace GuiLab0329.ViewModel
         }
         public void Filter(typeOfFood type )
         {
+            
+
+            if (check)
+            {
+                check = false;
+                ListCopy();
+            }
+            else
+            {
+                check = true;
+                filteredList.Clear();
+                foreach (Food food in leftList)
+                {
+                    if (food.Type == type)
+                    {
+                        filteredList.Add(food);
+                    }
+                }
+            }         
+            
+            
+
+        }
+        public void ListCopy()
+        {
+            
+            
             filteredList.Clear();
+            
+            
             foreach (Food food in leftList)
             {
-                if (food.Type==type)
-                {
-                    filteredList.Add(food);
-                }
+                filteredList.Add(food);
             }
-
+            
         }
 
         public void Edit(Food f)
