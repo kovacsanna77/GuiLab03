@@ -69,8 +69,8 @@ namespace GuiLab0329.ViewModel
                 );
 
             RemoveFromRight = new RelayCommand(
-                () => rightList.Remove(SelectedFromRight),
-                () => SelectedFromRight != null
+                () => rightList.Remove(SelectedFromRight)
+                
                 );
 
             Doubleclick = new RelayCommand(() => Edit(SelectedFromLeft));
