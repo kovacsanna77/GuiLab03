@@ -25,7 +25,7 @@
             <RowDefinition Height="7*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <ListBox ItemsSource="{Binding filteredList}"  SelectedItem="{Binding SelectedFromLeft}" Grid.Column="0" Grid.Row="1" HorizontalContentAlignment="Left">
+        <ListBox ItemsSource="{Binding filteredList}" SelectedItem="{Binding SelectedFromLeft}" Grid.Column="0" Grid.Row="1" HorizontalContentAlignment="Left">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Background="{Binding Type, Converter={StaticResource colorConverter}}" HorizontalAlignment="Stretch">
@@ -43,7 +43,7 @@
         </ListBox>
 
 
-        <ListBox ItemsSource="{Binding rightList}"  SelectedItem="{Binding SelectedFromRight}" Grid.Column="2" Grid.RowSpan="2" Grid.Row="1" >
+        <ListBox ItemsSource="{Binding rightList}" SelectedItem="{Binding SelectedFromRight}" Grid.Column="2" Grid.RowSpan="2" Grid.Row="1" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -54,8 +54,7 @@
                         </Grid.ColumnDefinitions>
                         <Label Content="{Binding Name}" Grid.Column="0"/>
                         <Label Content="{Binding Type}" Grid.Column="1"/>
-                        <Label Content="{Binding Cost}" Grid.Column="2"/>
-                        
+                        <Label Content="{Binding Cost}" Grid.Column="2"/>                        
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
