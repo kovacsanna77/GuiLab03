@@ -60,7 +60,7 @@
          </ListBox>
         
         
-        <ComboBox Width="200" ItemsSource="{Binding filterTypes}" SelectedItem="{Binding selectedFilter}" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" VerticalContentAlignment="Center" Margin="10"/>
+        <ComboBox Width="200" ItemsSource="{Binding filterTypes}" SelectedItem="{Binding SelectedFilter}" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" VerticalContentAlignment="Center" Margin="10"/>
         <CheckBox Content="Filter"  Grid.Column="0"  Command="{Binding Checked}" Grid.Row="0" HorizontalAlignment="Left" Width="98" Margin="10" VerticalAlignment="Center" VerticalContentAlignment="Center" />
 
         <StackPanel Grid.Row="0"  Grid.RowSpan="3" Grid.Column="1">

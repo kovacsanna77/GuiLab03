@@ -29,11 +29,7 @@ namespace GuiLab0329
             (this.DataContext as EditWindowViewModel).Setup(f);
         }
 
-        private void Vm_EditedDone(object? sender, EventArgs e)
-        {
-
-        }
-
+      
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             foreach (var item in stack.Children)
@@ -46,9 +42,6 @@ namespace GuiLab0329
             this.DialogResult = true;
         }
 
-        private void Button_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-
-        }
+        
     }
 }

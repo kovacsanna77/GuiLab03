@@ -20,8 +20,26 @@ namespace GuiLab0329.ViewModel
         public ObservableCollection<Food> rightList { get; set; }
         public ObservableCollection<Food> filteredList { get; set; }
         public ObservableCollection<typeOfFood> filterTypes { get; set; }
-        public typeOfFood selectedFilter { get; set; }
-        public bool check { get; set; }
+
+        private typeOfFood selectedFilter;
+        public typeOfFood SelectedFilter
+        {
+            get { return selectedFilter; }
+            set
+            {
+                SetProperty(ref selectedFilter, value);
+                (Checked as RelayCommand).NotifyCanExecuteChanged();
+            }
+        }
+        private bool check;
+        public bool Check { 
+            get { return check; }
+            set
+            {
+                SetProperty(ref check, value);
+                (Checked as RelayCommand).NotifyCanExecuteChanged();
+            }
+        }
 
         private Food selectedFromLeft;
 
@@ -43,7 +61,7 @@ namespace GuiLab0329.ViewModel
             get { return selectedFromRight; }
             set
             {
-               SetProperty(ref selectedFromRight, value);
+                SetProperty(ref selectedFromRight, value);
                 (RemoveFromRight as RelayCommand).NotifyCanExecuteChanged();
             }
         }
@@ -85,12 +103,17 @@ namespace GuiLab0329.ViewModel
             filterTypes.Add(typeOfFood.appetizer);
             filterTypes.Add(typeOfFood.drink);
 
-            leftList.Add(new Food() { Name = "Bécsi Szelet", Type = typeOfFood.maincourse, Cost = 2500 });
+            leftList.Add(new Food() { Name = "Bécsi Szelet", Type = typeOfFood.maincourse, Cost = 4000 });
+            leftList.Add(new Food() { Name = "Gyümölcssaláta", Type = typeOfFood.appetizer, Cost = 2000 });
+            leftList.Add(new Food() { Name = "Limonádé", Type = typeOfFood.drink, Cost = 1200 });
+            leftList.Add(new Food() { Name = "Grill Csirke", Type = typeOfFood.maincourse, Cost = 3500 });
+            leftList.Add(new Food() { Name = "Krémes", Type = typeOfFood.dessert, Cost = 1500 });
+            leftList.Add(new Food() { Name = "Tavaszi Zöldségleves", Type = typeOfFood.appetizer, Cost = 2500 });
+            leftList.Add(new Food() { Name = "Kóla", Type = typeOfFood.drink, Cost = 800 });
             leftList.Add(new Food() { Name = "Palacsinta", Type = typeOfFood.dessert, Cost = 1000 });
-            leftList.Add(new Food() { Name = "Limonádé", Type = typeOfFood.drink, Cost = 1000 });
             ListCopy();
 
-            check = false;
+
             Checked = new RelayCommand(() => Filter(selectedFilter));
 
 
@@ -116,8 +139,6 @@ namespace GuiLab0329.ViewModel
         }
         public void Filter(typeOfFood type)
         {
-
-
             if (check)
             {
                 check = false;
@@ -136,15 +157,11 @@ namespace GuiLab0329.ViewModel
                 }
             }
 
-
-
         }
         public void ListCopy()
         {
 
-
             filteredList.Clear();
-
 
             foreach (Food food in leftList)
             {
