@@ -1,4 +1,8 @@
-﻿using System;
+﻿using GuiLab0329.Logic;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Toolkit.Mvvm.DependencyInjection;
+using Microsoft.Toolkit.Mvvm.Messaging;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +17,15 @@ namespace GuiLab0329
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            Ioc.Default.ConfigureServices(
+                new ServiceCollection()
+                    .AddSingleton<IMenuLogic,MenuLogic>()
+                    
+                    .AddSingleton<IMessenger>(WeakReferenceMessenger.Default)
+                    .BuildServiceProvider()
+                );
+        }
     }
 }

@@ -33,6 +33,17 @@ namespace GuiLab0329.Model
 			set { SetProperty(ref cost, value); }
 		}
 
+		public Food GetCopy()
+		{
+			return new Food()
+			{
+				Name = this.name,
+				Type = this.type,
+				Cost = this.cost,
+
+			};
+		}
+
 
 	}
 
