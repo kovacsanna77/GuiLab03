@@ -5,7 +5,6 @@ using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
 
@@ -44,7 +43,8 @@ namespace GuiLab0329.ViewModel
             get { return selectedFromRight; }
             set
             {
-                selectedFromRight = value;
+               SetProperty(ref selectedFromRight, value);
+                (RemoveFromRight as RelayCommand).NotifyCanExecuteChanged();
             }
         }
 
