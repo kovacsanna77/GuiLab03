@@ -158,7 +158,7 @@ namespace GuiLab0329.ViewModel
             }
 
         }
-        public void ListCopy()
+        private void ListCopy()
         {
 
             filteredList.Clear();

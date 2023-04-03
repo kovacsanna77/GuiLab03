@@ -14,7 +14,7 @@
         <Label Content="Name" Padding="10"/>
         <TextBox Text="{Binding Current.Name}" Padding="10"/>
         <Label Content="Type" Padding="10"/>
-        <TextBox Text="{Binding Current.Type}" Padding="10"/>
+        <ComboBox Text="{Binding Current.Type}" Padding="10"/>
         <Label Content="Cost" Padding="10"/>
         <TextBox Text="{Binding Current.Cost}" Padding="10"/>
         <Button Content="Save" MouseLeftButtonDown="Button_Click" Padding="10" Margin="10"/>

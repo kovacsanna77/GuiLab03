@@ -35,6 +35,9 @@ namespace GuiLab0329
             ed.ShowDialog();
         }
 
-        
+        private void ComboBox_Selected(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
