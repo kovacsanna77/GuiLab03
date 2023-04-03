@@ -24,10 +24,10 @@ namespace GuiLab0329.Helper
                 return Brushes.LightBlue;
             }else if(v == typeOfFood.maincourse)
             {
-                return Brushes.Green;
+                return Brushes.LightGreen;
             }else if( v == typeOfFood.drink)
             {
-                return Brushes.Gold;
+                return Brushes.LightGoldenrodYellow;
             }
 
             return Brushes.White;

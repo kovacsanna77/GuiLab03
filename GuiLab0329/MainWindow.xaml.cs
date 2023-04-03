@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GuiLab0329.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,9 +27,14 @@ namespace GuiLab0329
 
         }
 
-        private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        
+
+        private void ListBox_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
         {
-            
+            EditWindow ed = new EditWindow((this.DataContext as MainWindowViewModel).SelectedFromLeft);
+            ed.ShowDialog();
         }
+
+        
     }
 }

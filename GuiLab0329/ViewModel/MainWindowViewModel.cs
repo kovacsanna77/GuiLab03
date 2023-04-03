@@ -1,8 +1,11 @@
-﻿using GuiLab0329.Model;
+﻿using GuiLab0329.Logic;
+using GuiLab0329.Model;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
-using System.Linq;
+using System.ComponentModel;
+using System.Windows;
 using System.Windows.Input;
 
 namespace GuiLab0329.ViewModel
@@ -10,12 +13,33 @@ namespace GuiLab0329.ViewModel
     public class MainWindowViewModel : ObservableRecipient
     {
 
-       public  ObservableCollection<Food> leftList { get; set; }
+        IMenuLogic logic;
+
+
+        public ObservableCollection<Food> leftList { get; set; }
         public ObservableCollection<Food> rightList { get; set; }
         public ObservableCollection<Food> filteredList { get; set; }
         public ObservableCollection<typeOfFood> filterTypes { get; set; }
-        public typeOfFood selectedFilter { get; set; }
-        public bool check{get; set;}
+
+        private typeOfFood selectedFilter;
+        public typeOfFood SelectedFilter
+        {
+            get { return selectedFilter; }
+            set
+            {
+                SetProperty(ref selectedFilter, value);
+                (Checked as RelayCommand).NotifyCanExecuteChanged();
+            }
+        }
+        private bool check;
+        public bool Check { 
+            get { return check; }
+            set
+            {
+                SetProperty(ref check, value);
+                (Checked as RelayCommand).NotifyCanExecuteChanged();
+            }
+        }
 
         private Food selectedFromLeft;
 
@@ -35,29 +59,39 @@ namespace GuiLab0329.ViewModel
         public Food SelectedFromRight
         {
             get { return selectedFromRight; }
-            set 
+            set
             {
-                selectedFromRight = value; 
+                SetProperty(ref selectedFromRight, value);
+                (RemoveFromRight as RelayCommand).NotifyCanExecuteChanged();
             }
         }
 
+        public int AllCost
+        { get { return logic.AllCost; } }
 
         public ICommand AddToRight { get; set; }
-        public  ICommand RemoveFromRight { get; set; }
-        public ICommand Doubleclick { get; set; }
+        public ICommand RemoveFromRight { get; set; }
         public ICommand Checked { get; set; }
-        
-        public int AllCost
+
+
+        public static bool IsInDesignMode
         {
+
             get
             {
-                return rightList.Count == 0 ? 0 : rightList.Sum(t => t.Cost);
-
+                var prop = DesignerProperties.IsInDesignModeProperty;
+                return (bool)DependencyPropertyDescriptor.FromProperty(prop, typeof(FrameworkElement)).Metadata.DefaultValue;
             }
         }
-
         public MainWindowViewModel()
+            : this(IsInDesignMode ? null : Ioc.Default.GetService<IMenuLogic>())
         {
+
+        }
+
+        public MainWindowViewModel(IMenuLogic logic)
+        {
+            this.logic = logic;
 
             leftList = new ObservableCollection<Food>();
             filteredList = new ObservableCollection<Food>();
@@ -68,34 +102,43 @@ namespace GuiLab0329.ViewModel
             filterTypes.Add(typeOfFood.dessert);
             filterTypes.Add(typeOfFood.appetizer);
             filterTypes.Add(typeOfFood.drink);
-            
-            leftList.Add(new Food() { Name = "Bécsi Szelet", Type = typeOfFood.maincourse, Cost = 2500 });
+
+            leftList.Add(new Food() { Name = "Bécsi Szelet", Type = typeOfFood.maincourse, Cost = 4000 });
+            leftList.Add(new Food() { Name = "Gyümölcssaláta", Type = typeOfFood.appetizer, Cost = 2000 });
+            leftList.Add(new Food() { Name = "Limonádé", Type = typeOfFood.drink, Cost = 1200 });
+            leftList.Add(new Food() { Name = "Grill Csirke", Type = typeOfFood.maincourse, Cost = 3500 });
+            leftList.Add(new Food() { Name = "Krémes", Type = typeOfFood.dessert, Cost = 1500 });
+            leftList.Add(new Food() { Name = "Tavaszi Zöldségleves", Type = typeOfFood.appetizer, Cost = 2500 });
+            leftList.Add(new Food() { Name = "Kóla", Type = typeOfFood.drink, Cost = 800 });
             leftList.Add(new Food() { Name = "Palacsinta", Type = typeOfFood.dessert, Cost = 1000 });
-            leftList.Add(new Food() { Name = "Limonádé", Type = typeOfFood.drink, Cost = 1000 });
             ListCopy();
 
-            check = false;
-            Checked = new RelayCommand(()=>Filter(selectedFilter));
-            
-            
 
+            Checked = new RelayCommand(() => Filter(selectedFilter));
+
+
+            logic.SetupCollections(leftList, rightList, filteredList);
             AddToRight = new RelayCommand(
-                () => rightList.Add(SelectedFromLeft),
-                ()=> SelectedFromLeft != null
+                () => logic.AddToRight(SelectedFromLeft),
+                () => selectedFromLeft != null
                 );
 
             RemoveFromRight = new RelayCommand(
-                () => rightList.Remove(SelectedFromRight),
-                () => SelectedFromRight != null
+                () => logic.RemoveFromRight(SelectedFromRight),
+                () => selectedFromRight != null
                 );
+            Messenger.Register<MainWindowViewModel, string, string>(this, "MenuInfo", (recipient, msg) =>
+            {
+                OnPropertyChanged("AllCost");
+                OnPropertyChanged("AddToRight");
+                OnPropertyChanged("RemoveFromRight");
 
-            Doubleclick = new RelayCommand(() => Edit(SelectedFromLeft));
+
+            });
 
         }
-        public void Filter(typeOfFood type )
+        public void Filter(typeOfFood type)
         {
-            
-
             if (check)
             {
                 check = false;
@@ -112,28 +155,21 @@ namespace GuiLab0329.ViewModel
                         filteredList.Add(food);
                     }
                 }
-            }         
-            
-            
+            }
 
         }
         public void ListCopy()
         {
-            
-            
+
             filteredList.Clear();
-            
-            
+
             foreach (Food food in leftList)
             {
                 filteredList.Add(food);
             }
-            
+
         }
 
-        public void Edit(Food f)
-        {
-            new EditWindow(f).ShowDialog();
-        }
+
     }
 }
