@@ -31,6 +31,7 @@ namespace GuiLab0329.Helper
             }
 
             return Brushes.White;
+
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
